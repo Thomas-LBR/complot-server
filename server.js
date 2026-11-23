@@ -13,6 +13,7 @@ function createGameServer() {
   const bang = require('./bang').attachBang(io);
   const timebomb = require('./timebomb').attachTimebomb(io);
   const chateau = require('./chateau').attachChateau(io);
+  const codenames = require('./codenames').attachCodenames(io);
   const rooms = new Map();
   const sessions = new Map();
   const baseRoles = ['Duchesse', 'Assassin', 'Capitaine', 'Comtesse'];
@@ -406,7 +407,7 @@ function createGameServer() {
   }, 60000);
   cleanup.unref();
   server.on('close', () => clearInterval(cleanup));
-  return { server, io, rooms, bang, timebomb, chateau, close: () => new Promise(resolve => io.close(resolve)) };
+  return { server, io, rooms, bang, timebomb, chateau, codenames, close: () => new Promise(resolve => io.close(resolve)) };
 }
 
 if (require.main === module) {
